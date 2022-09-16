@@ -1,5 +1,27 @@
 {
+  "scripts": {
+    "start": "node server.js",
+    "start:dev": "nodemon server.js"
+  },
+  "name": "express-with-mongodb",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrunoSGomes/express-with-mongodb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrunoSGomes/express-with-mongodb/issues"
+  },
+  "homepage": "https://github.com/BrunoSGomes/express-with-mongodb#readme",
+  "description": "",
   "dependencies": {
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
