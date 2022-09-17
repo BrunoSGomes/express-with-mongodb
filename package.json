@@ -19,7 +19,8 @@
   "homepage": "https://github.com/BrunoSGomes/express-with-mongodb#readme",
   "description": "",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "mongoose": "^6.6.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
