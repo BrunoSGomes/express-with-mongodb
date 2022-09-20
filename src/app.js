@@ -1,6 +1,7 @@
 import express from 'express'
 import db from './config/dbConnect.js'
 import books from './model/Book.js'
+import routes from './router/index.js'
 
 db.on('error', console.log.bind(console, 'Connection error'))
 db.once('open', () => {
@@ -11,15 +12,7 @@ const app = express()
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
-    res.status(200).send('Welcome to the library :)')
-})
-
-app.get('/books', (req, res) => {
-    books.find((err, allBooks) => {
-        res.status(200).json(allBooks)
-    })
-})
+routes(app)
 
 app.get('/books/:id', (req, res) => {
     const index = searchBook(req.params.id)
