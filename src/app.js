@@ -1,6 +1,5 @@
 import express from 'express'
 import db from './config/dbConnect.js'
-import books from './model/Book.js'
 import routes from './router/index.js'
 
 db.on('error', console.log.bind(console, 'Connection error'))
@@ -10,35 +9,6 @@ db.once('open', () => {
 
 const app = express()
 
-app.use(express.json())
-
 routes(app)
-
-app.get('/books/:id', (req, res) => {
-    const index = searchBook(req.params.id)
-    res.status(200).json(books[index])
-})
-
-app.post('/books', (req, res) => {
-    books.push(req.body)
-    res.status(201).send('The book has been created')
-})
-
-app.put('/books/:id', (req, res) => {
-    const index = searchBook(req.params.id)
-    books[index].title = req.body.title
-    res.status(200).json(books[index])
-})
-
-app.delete('/books/:id', (req, res) => {
-    const { id } = req.params
-    const index = searchBook(id)
-    books.splice(index, 1)
-    res.status(200).json(`The book ${id} has been deleted!`)
-})
-
-function searchBook(id) {
-    return books.findIndex((book) => book.id === +id)
-}
 
 export default app
