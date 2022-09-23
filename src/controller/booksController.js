@@ -5,6 +5,7 @@ export default class BookController {
     static findBooks = (req, res) => {
         books.find()
             .populate('author')
+            .populate('publisher')
             .exec((err, allBooks) => {
                 res.status(200).json(allBooks)
             })
@@ -14,6 +15,7 @@ export default class BookController {
         const { id } = req.params
         books.findById(id)
             .populate('author', 'name')
+            .populate('publisher', 'name')
             .exec((err, book) => {
                 if (err) {
                     res.status(400).send({ message: `${err.message} - id not found.` })
@@ -21,6 +23,17 @@ export default class BookController {
                     res.status(200).send(book)
                 }
             })
+    }
+
+    static findBookByPublisher = (req, res) => {
+        const { publisher } = req.query
+        books.find({ 'publisher': publisher }, {}, (err, books) => {
+            if (!err) {
+                res.status(200).send(books)
+            } else {
+                res.status(500).send({ message: `${err.message} - publisher id not found.` })
+            }
+        })
     }
 
     static registerBook = (req, res) => {
